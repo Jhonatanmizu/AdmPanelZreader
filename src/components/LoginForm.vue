@@ -1,6 +1,6 @@
 <template>
-  <main class="form-signin">
-    <form @submit.stop.prevent="login">
+  <main class="form-signin mt-2 slideInUp">
+    <!-- <form @submit.stop.prevent="login">
       <img
         class="mb-4"
         src="https://lh5.googleusercontent.com/CP1iW0LKcx6T6M2WJVz543EDb0TGQBjwc8irGPmtqrbL4awxOXljqb4vi4eRMyEYDInTMguaVVJaUIvcpvx4ILc=w16383"
@@ -31,6 +31,34 @@
         <label for="floatingPassword">Senha</label>
       </div>
 
+      <button class="w-100 btn btn-lg btn-danger" type="submit">Login</button>
+    </form> -->
+
+    <form @submit.stop.prevent="login">
+      <div class="mb-3 logo">
+        <img src="../assets/zreaderLogo.svg" alt="zreader logo" />
+      </div>
+      <h1 class="fs-1 fw-normal">Bem vindo!</h1>
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          v-model="user"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Nome de usuário"
+        />
+        <label for="floatingInput">Usuário</label>
+      </div>
+      <div class="form-floating mb-2">
+        <input
+          v-model="password"
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Senha"
+        />
+        <label for="floatingPassword">Senha</label>
+      </div>
       <button class="w-100 btn btn-lg btn-danger" type="submit">Login</button>
     </form>
   </main>
@@ -89,8 +117,13 @@ export default {
   padding: 15px;
   margin: auto;
   text-align: center;
+  background: #f2f2f2;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
-
 .form-signin .checkbox {
   font-weight: 400;
 }
@@ -109,5 +142,39 @@ export default {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.form-signin .logo img {
+  height: 6.81rem;
+  width: 6.81rem;
+}
+.slideInUp {
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes slideInUp {
+  0% {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes slideInUp {
+  0% {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
 }
 </style>

@@ -1,5 +1,6 @@
 import LoginFormVue from "@/components/LoginForm.vue";
 import HomeViewVue from "@/views/HomeView.vue";
+import NotFoundVue from "@/views/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Guard from "../services/middleware";
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeViewVue,
+    beforeEnter: Guard.auth,
   },
   {
     path: "/about",
@@ -22,6 +24,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: NotFoundVue,
   },
 ];
 
