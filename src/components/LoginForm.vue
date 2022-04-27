@@ -117,12 +117,10 @@ export default {
   padding: 15px;
   margin: auto;
   text-align: center;
-  background: #f2f2f2;
-  border-radius: 1rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
   padding: 1rem;
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 .form-signin .checkbox {
   font-weight: 400;

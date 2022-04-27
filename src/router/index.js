@@ -2,7 +2,7 @@ import LoginFormVue from "@/components/LoginForm.vue";
 import HomeViewVue from "@/views/HomeView.vue";
 import NotFoundVue from "@/views/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import Guard from "../services/middleware";
+// import Guard from "../services/middleware";
 const routes = [
   {
     path: "/login",
@@ -13,12 +13,12 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeViewVue,
-    beforeEnter: Guard.auth,
+    // beforeEnter: Guard.auth,
   },
   {
     path: "/about",
     name: "about",
-    beforeEnter: Guard.auth,
+    // beforeEnter: Guard.auth,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

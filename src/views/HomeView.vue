@@ -1,14 +1,21 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <HeaderHome />
+    <ContentHome />
+    <LoadingSpinner />
+    <FooterHome />
   </div>
 </template>
 
 <script>
+import HeaderHome from "../components/Home/HeaderHome.vue";
+import FooterHome from "../components/Home/FooterHome.vue";
+import ContentHome from "@/components/Home/ContentHome.vue";
+import LoadingSpinner from "../shared/LoadingSpinner.vue";
 // @ is an alias to /src
 
 export default {
   name: "HomeView",
-  components: {},
+  components: { HeaderHome, FooterHome, ContentHome, LoadingSpinner },
 };
 </script>
