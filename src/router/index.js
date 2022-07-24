@@ -1,7 +1,7 @@
 import LoginFormVue from "@/components/LoginForm.vue";
 import HomeViewVue from "@/views/HomeView.vue";
 import NotFoundVue from "@/views/NotFound.vue";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 // import Guard from "../services/middleware";
 const routes = [
   {
@@ -33,7 +33,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes,
 });
 
