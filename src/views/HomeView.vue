@@ -2,7 +2,7 @@
   <div class="home">
     <HeaderHome />
     <ContentHome />
-    <LoadingSpinner />
+
     <FooterHome />
   </div>
 </template>
@@ -11,11 +11,11 @@
 import HeaderHome from "../components/Home/HeaderHome.vue";
 import FooterHome from "../components/Home/FooterHome.vue";
 import ContentHome from "@/components/Home/ContentHome.vue";
-import LoadingSpinner from "../shared/LoadingSpinner.vue";
+// import LoadingSpinner from "../shared/LoadingSpinner.vue";
 // @ is an alias to /src
 
 export default {
   name: "HomeView",
-  components: { HeaderHome, FooterHome, ContentHome, LoadingSpinner },
+  components: { HeaderHome, FooterHome, ContentHome },
 };
 </script>

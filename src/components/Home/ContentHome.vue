@@ -3,6 +3,7 @@
 </template>
 <style>
 .content {
-  min-height: 100vh;
+  min-height: 80vh;
+  background-color: var(--secondary-color);
 }
 </style>

@@ -6,12 +6,12 @@
         <h3>Bem vindo ao painel administrativo</h3>
       </div>
       <div class="input__container">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" v-model="user">
+        <label for="email">E-mail :</label>
+        <input type="email" name="email" v-model="user" placeholder="Digite o seu usuário">
       </div>
       <div class="input__container">
-        <label for="password">Senha</label>
-        <input type="password" name="password" v-model="password">
+        <label for="password">Senha :</label>
+        <input type="password" name="password" v-model="password" placeholder="Digite a sua senha">
       </div>
 
       <button type="submit" class="btn btn-login">Login</button>

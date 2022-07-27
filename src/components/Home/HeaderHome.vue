@@ -1,42 +1,25 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Zreader ADM</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-      </div>
-      <div class="btn-logout">
-        <button class="btn btn-danger">
-          <span class="m-1">Logout</span>
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        </button>
-      </div>
+  <header id="header">
+    <div class="header__logo">
+      <img src="../../assets/zreaderLogo.svg" class="zreader-logo" alt="Zreader logo" />
+      <p>Sua plataforma de jogos educativos.</p>
     </div>
-  </nav>
+    <h3 class="header__title">Bem vindo, usuário</h3>
+    <!-- <div class="header__title">
+    </div> -->
+
+    <button class="header__btn">
+      <span>Sair</span>
+    </button>
+    <!-- <div class="header__container">
+      <div class="title">
+        <h3>Bem vindo, usuário</h3>
+      </div>
+      <button class="btn-logout">
+        Sair
+      </button>
+    </div> -->
+  </header>
 </template>
 
 <script>
@@ -45,4 +28,74 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#header {
+  border: bottom 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 4.5rem;
+  padding: 1rem 5.5rem;
+  background: linear-gradient(270deg, #c10c25 50%, rgba(231, 43, 69, 0) 81.68%),
+    #f0565c;
+  mix-blend-mode: normal;
+  text-align: center;
+
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Open sans", sans-serif;
+}
+
+.header__logo {
+  min-height: 6.25rem;
+  display: flex;
+  position: relative;
+  width: 25rem;
+  transition: all 1s ease-in-out;
+}
+
+.zreader-logo {
+  position: absolute;
+  top: 1.25rem;
+  height: 6rem;
+  width: 6rem;
+}
+
+.header__logo p {
+  position: absolute;
+  top: 5.625rem;
+  font-size: 1rem;
+  left: 7.5rem;
+}
+
+#header .header__title {
+
+  color: var(--secondary-color);
+}
+
+#header .header__btn {
+  /* width: rem; */
+  background-color: var(--alt-color);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: .25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#header .header__btn:active {
+  opacity: .8;
+}
+
+@media screen and (max-width:1000px) {
+  #header {
+    padding: 1rem;
+  }
+}
+</style>

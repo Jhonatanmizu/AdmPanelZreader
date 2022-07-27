@@ -25,7 +25,6 @@
 
 html {
   font-size: 62.5%;
-
 }
 
 body {
@@ -42,6 +41,6 @@ h4,
 h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
-  ;
+
 }
 </style>
