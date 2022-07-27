@@ -8,7 +8,7 @@
     <!-- <div class="header__title">
     </div> -->
 
-    <button class="header__btn">
+    <button class="header__btn" @click="logout">
       <span>Sair</span>
     </button>
     <!-- <div class="header__container">
@@ -23,8 +23,22 @@
 </template>
 
 <script>
+import api from '@/services/api';
+import Cookie from "js-cookie";
+
 export default {
   name: "Header-home",
+  methods: {
+    logout() {
+      api.post("logout").then((resp) => {
+        console.log("LOGOUT", resp)
+        Cookie.remove("_app_token");
+
+      }).catch(err => {
+        console.log("ERROR", err);
+      })
+    }
+  },
 };
 </script>
 

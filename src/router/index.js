@@ -2,7 +2,7 @@ import LoginFormVue from "@/components/LoginForm.vue";
 import HomeViewVue from "@/views/HomeView.vue";
 import NotFoundVue from "@/views/NotFound.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
-// import Guard from "../services/middleware";
+import Guard from "../services/middleware";
 const routes = [
   {
     path: "/login",
@@ -13,7 +13,7 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeViewVue,
-    // beforeEnter: Guard.auth,
+    beforeEnter: Guard.auth,
   },
   {
     path: "/about",

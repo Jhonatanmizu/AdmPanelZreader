@@ -36,7 +36,7 @@ export default {
 <style>
 .footer {
   width: 100%;
-  height: 18rem;
+  min-height: 18rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,6 +112,16 @@ export default {
 
   100% {
     transform: translateY(0rem);
+  }
+}
+
+@media (max-width:800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sponsors {
+    flex-direction: column;
   }
 }
 </style>

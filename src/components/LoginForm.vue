@@ -34,7 +34,7 @@ export default {
 
 
 
-    // Cookie.remove("_app_token");
+
   },
   data() {
     return {
@@ -48,31 +48,18 @@ export default {
       // console.log("logando.....");
 
       const payload = {
-        user: this.user,
+        email: this.user,
         password: this.password,
       };
       console.log("Payload", payload);
-      api.post("/login", JSON.stringify(payload)).then((resp) => {
+      api.post("login", JSON.stringify(payload)).then((resp) => {
         console.log(resp.data);
         this.$router.push('/')
-        Cookie.set("_app_token", resp.acces_token)
+        Cookie.set("_app_token", resp.data.token)
       }).catch((err) => {
         console.error(err);
       })
-      // axios({
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Access: "application/json",
-      //   },
-      //   body: JSON.stringify(payload),
-      // })
-      //   .post(baseUrl)
-      //   .then((resp) => {
-      //     console.log(resp.data);
-      //     Cookie.set("_app_token", resp.acces_token);
-      //   })
-      //   .catch((err) => console.log(err));
+
     },
   },
 };
@@ -84,7 +71,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem 1rem;
+  margin: 2rem 0;
 }
 
 .form {
