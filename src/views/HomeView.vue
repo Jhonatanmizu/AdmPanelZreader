@@ -1,15 +1,15 @@
 <template>
-  <div class="home">
-    <HeaderHome />
-    <ContentHome />
+  <!-- <div class="home"> -->
+  <HeaderHome />
+  <ContentHome />
 
-    <FooterHome />
-  </div>
+  <FooterHome />
+  <!-- </div> -->
 </template>
 
 <script>
-import HeaderHome from "../components/Home/HeaderHome.vue";
-import FooterHome from "../components/Home/FooterHome.vue";
+import HeaderHome from "@/components/Home/HeaderHome.vue";
+import FooterHome from "@/components/Home/FooterHome.vue";
 import ContentHome from "@/components/Home/ContentHome.vue";
 // import LoadingSpinner from "../shared/LoadingSpinner.vue";
 // @ is an alias to /src
