@@ -38,11 +38,11 @@ export default {
 
 <style scoped>
 .accordion {
-  min-width: 100%;
+  max-width: 100%;
   min-height: 7.2rem;
   border-radius: 1rem;
   border: .1rem solid #9D9191;
-
+  margin: 2rem;
   padding: 1rem;
   background-color: var(--light-bg);
 }

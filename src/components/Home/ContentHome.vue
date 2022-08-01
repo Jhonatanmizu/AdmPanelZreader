@@ -1,29 +1,31 @@
 <template>
   <div class=" content">
     <Accordion title="Cabeçalho">
-      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet in blanditiis veritatis dignissimos nisi
-        soluta
-        debitis, autem voluptates, praesentium quia dolorem modi minus cum possimus cupiditate. Fugiat blanditiis
-        placeat
-        accusantium.</p>
+      <Input label="Logo Marca" :upload="true"> </Input>
+      <Input label="Slogan" placeholder="Descrição" :upload="false"> </Input>
+
     </Accordion>
     <Accordion title="Descrição">
-      <Input placeholder="Sua plataforma de jogos"></Input>
+      <!-- <Input label="Logo Marca" :upload="true"> </Input> -->
     </Accordion>
   </div>
 </template>
 
 <script>
 import Accordion from '../shared/Accordion.vue';
+import Input from '../shared/Input.vue';
+
 export default {
   name: "ContentHome",
-  components: { Accordion },
+  components: { Accordion, Input },
+  // components: { Accordion },
 
 }
 </script>
-<style>
+<style scoped>
 .content {
-  padding: 4rem 5.5rem 1rem 5.5rem;
+  margin: 0 auto;
+  padding: 3rem 5.5rem;
 
   height: 100vh;
   background-color: var(--secondary-color);

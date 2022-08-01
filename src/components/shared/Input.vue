@@ -1,30 +1,89 @@
 <template>
     <div class="input-container">
+
         <!-- <input type="text" name="" id=""> -->
-        <input type="file" name="arquivos" class="btn btn-success" accept="image/png, image/jpeg" v-on:input="dataImage"
-            multiple />
-        <button>
+        <img :src="imgPath" :alt="label" class="img" v-if="upload && imgPath">
+        <form class="form">
+
+            <label for="generic" class="input__label">{{ label }}</label>
+            <input v-show="upload" type="file" id="generic" name="photo" accept="image/png, image/jpeg"
+                @change="onFileSelected($event)" multiple />
+            <input v-show="!upload" type="text" :name="label" :placeholder="placeholder" v-model="inputValue">
+        </form>
+
+
+        <!-- <button>
             <i class="fas-solid fa-upload"></i>
-        </button>
+        </button> -->
     </div>
 </template>
 
 <script>
+
 export default {
-    name: "InputComponent",
+    name: "InputGenComponent",
+
     props: {
         placeholder: String,
-        upload: Boolean
+        upload: Boolean,
+        label: String
     },
+
     data() {
         return {
-            dataImage: null
+            selectedFile: null,
+            inputValue: '',
+            imgPath: null
         }
     },
     methods: {
         setImage(value) {
             this.dataImage = value
+        },
+
+        onFileSelected(event) {
+
+            this.imgPath = URL.createObjectURL(event.target.files[0])
+
+            this.selectedFile = event.target.files[0]
+        },
+        sendToFather() {
+            this.$emit()
         }
+
     },
 }
 </script>
+
+<style scoped>
+.input-container {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    /* justify-content: ; */
+    gap: 2rem;
+    margin: .3rem 0;
+}
+
+.input-container .img {
+    height: 10rem;
+    width: 15rem;
+    border-radius: .5rem;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.input-container .input__label {
+    font-size: 2.8rem;
+    text-transform: capitalize;
+}
+
+.input-container input {
+    border-radius: .5rem;
+}
+</style>
