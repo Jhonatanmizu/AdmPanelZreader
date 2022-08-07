@@ -2,40 +2,43 @@
   <main class="container slideInUp">
     <form @submit.stop.prevent="login" class="form">
       <div class="logo__container">
-        <img src="../assets/zreaderLogo.svg" alt="Zreader logo" class="logo">
+        <img src="../assets/zreaderLogo.svg" alt="Zreader logo" class="logo" />
         <h3>Bem vindo ao painel administrativo</h3>
       </div>
       <div class="input__container">
         <label for="email">E-mail :</label>
-        <input type="email" name="email" v-model="user" placeholder="Digite o seu usuário">
+        <input
+          type="email"
+          name="email"
+          v-model="user"
+          placeholder="Digite o seu usuário"
+        />
       </div>
       <div class="input__container">
         <label for="password">Senha :</label>
-        <input type="password" name="password" v-model="password" placeholder="Digite a sua senha">
+        <input
+          type="password"
+          name="password"
+          v-model="password"
+          placeholder="Digite a sua senha"
+        />
       </div>
 
       <button type="submit" class="btn btn-login">Login</button>
-
     </form>
-
   </main>
 </template>
 
 <script>
 // import axios from "axios";
-import api from '../services/api'
+import api from "../services/api";
 import Cookie from "js-cookie";
 export default {
   name: "LoginForm",
   props: {
     msg: String,
   },
-  created() {
-
-
-
-
-  },
+  created() {},
   data() {
     return {
       user: "",
@@ -52,14 +55,19 @@ export default {
         password: this.password,
       };
       console.log("Payload", payload);
-      api.post("login", JSON.stringify(payload)).then((resp) => {
-        console.log(resp.data);
-        this.$router.push('/')
-        Cookie.set("_app_token", resp.data.token)
-      }).catch((err) => {
-        console.error(err);
-      })
-
+      api
+        .post("login", JSON.stringify(payload))
+        .then((resp) => {
+          console.log(resp.data);
+          Cookie.set("_app_token", resp.data.token);
+          api.defaults.headers.Authorization =
+            "Bearer " + Cookie.get("_app_token");
+          console.log("API", api);
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   },
 };
@@ -87,7 +95,6 @@ export default {
   gap: 1rem;
   background-color: rgba(255, 255, 255, 0.4);
   box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
-
 }
 
 .form .input__container {
@@ -95,7 +102,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
   margin: 1rem;
 }
 
@@ -109,8 +116,8 @@ export default {
   padding: 1.5rem;
 
   border: none;
-  border-radius: .5rem;
-  border: .2rem solid var(--alt-color);
+  border-radius: 0.5rem;
+  border: 0.2rem solid var(--alt-color);
   outline: none;
   outline-color: var(--primary-color);
 }
@@ -121,12 +128,12 @@ export default {
   border: none;
   outline: none;
   background-color: var(--primary-color);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   font-weight: 500;
   color: var(--secondary-color);
   font-size: 2rem;
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .form .btn:active {
@@ -135,7 +142,6 @@ export default {
 
 .form .btn:hover {
   background-color: rgba(231, 43, 69, 0.7);
-
 }
 
 .slideInUp {

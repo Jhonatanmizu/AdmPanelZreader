@@ -1,7 +1,11 @@
 <template>
   <header id="header">
     <div class="header__logo">
-      <img src="../../assets/zreaderLogo.svg" class="zreader-logo" alt="Zreader logo" />
+      <img
+        src="../../assets/zreaderLogo.svg"
+        class="zreader-logo"
+        alt="Zreader logo"
+      />
       <p>Sua plataforma de jogos educativos.</p>
     </div>
     <h3 class="header__title">Bem vindo, usuário</h3>
@@ -23,21 +27,25 @@
 </template>
 
 <script>
-import api from '@/services/api';
+import api from "@/services/api";
+
 import Cookie from "js-cookie";
 
 export default {
   name: "Header-home",
   methods: {
     logout() {
-      api.post("logout").then((resp) => {
-        console.log("LOGOUT", resp)
-        Cookie.remove("_app_token");
-
-      }).catch(err => {
-        console.log("ERROR", err);
-      })
-    }
+      api
+        .post("logout")
+        .then((resp) => {
+          console.log("LOGOUT", resp);
+          Cookie.remove("_app_token");
+          this.$router.push("/login");
+        })
+        .catch((err) => {
+          console.log("ERROR", err);
+        });
+    },
   },
 };
 </script>
@@ -55,7 +63,6 @@ export default {
     #f0565c;
   mix-blend-mode: normal;
   text-align: center;
-
 }
 
 a {
@@ -87,7 +94,6 @@ a {
 }
 
 #header .header__title {
-
   color: var(--secondary-color);
 }
 
@@ -96,7 +102,7 @@ a {
   background-color: var(--alt-color);
   padding: 1rem 2rem;
   border: none;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -104,10 +110,10 @@ a {
 }
 
 #header .header__btn:active {
-  opacity: .8;
+  opacity: 0.8;
 }
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width: 1000px) {
   #header {
     padding: 1rem;
   }

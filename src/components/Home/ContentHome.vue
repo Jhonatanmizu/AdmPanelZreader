@@ -1,33 +1,34 @@
 <template>
-  <div class=" content">
+  <div class="content">
     <Accordion title="Cabeçalho">
-      <Input label="Logo Marca" :upload="true"> </Input>
-      <Input label="Slogan" placeholder="Descrição" :upload="false"> </Input>
-
+      <!-- <Input label="Logo Marca" :upload="true"> </Input>
+      <Input label="Slogan" placeholder="Descrição" :upload="false"> </Input> -->
+      <HeaderForm></HeaderForm>
     </Accordion>
-    <Accordion title="Descrição">
-      <!-- <Input label="Logo Marca" :upload="true"> </Input> -->
+    <Accordion title="Sobre o projeto">
+      <AboutForm></AboutForm>
     </Accordion>
   </div>
 </template>
 
 <script>
-import Accordion from '../shared/Accordion.vue';
-import Input from '../shared/Input.vue';
+import Accordion from "../shared/Accordion.vue";
+
+import HeaderForm from "../HeaderForm/HeaderForm.vue";
+import AboutForm from "../AboutForm/AboutForm.vue";
 
 export default {
   name: "ContentHome",
-  components: { Accordion, Input },
+  components: { Accordion, HeaderForm, AboutForm },
   // components: { Accordion },
-
-}
+};
 </script>
 <style scoped>
 .content {
   margin: 0 auto;
   padding: 3rem 5.5rem;
 
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--secondary-color);
 }
 </style>
