@@ -43,7 +43,7 @@ export default {
   min-height: 7.2rem;
   border-radius: 1rem;
   border: 0.1rem solid #9d9191;
-  margin: 2rem;
+  margin: 2rem auto;
   padding: 1rem 0;
   background-color: var(--light-bg);
 }

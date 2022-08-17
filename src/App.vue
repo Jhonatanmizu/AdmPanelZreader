@@ -11,7 +11,7 @@
   --secondary-color: #fff;
   --light-bg: #f2f2f2f5;
   --alt-color: #ffe4e1;
-  --grey-varint: #d9d9d9;
+  --grey-variant: #d9d9d9;
   --gradient-color: linear-gradient(
       270deg,
       #c10c25 50%,
