@@ -1,8 +1,6 @@
 <template>
   <div class="content">
     <Accordion title="Cabeçalho">
-      <!-- <Input label="Logo Marca" :upload="true"> </Input>
-      <Input label="Slogan" placeholder="Descrição" :upload="false"> </Input> -->
       <HeaderForm></HeaderForm>
     </Accordion>
     <Accordion title="Sobre o projeto">

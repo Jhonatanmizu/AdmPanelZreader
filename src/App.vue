@@ -58,7 +58,7 @@ h6 {
   font-size: 1.8rem;
 
   height: 4.5rem;
-  background-color: var(--alt-color);
+  background-color: var(--grey-variant);
   border-radius: 0.5rem;
   outline: none;
   border: 0.2rem solid var(--light-bg);

@@ -57,7 +57,8 @@
   border: 0.2rem solid var(--light-bg);
   resize: none;
   font-size: 1.8rem;
-  background-color: var(--alt-color);
+  /* background-color: var(--alt-color); */
+  background-color: var(--grey-variant);
 
   border-radius: 0.5rem;
   outline: none;

@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <div class="content">
+      <InputWithImage
+        placeholder="logomarca"
+        label="Logomarca"
+        @outputData="listenOutputData"
+      />
       <div class="input__group">
         <label for="slogan" class="input__label">Slogan</label>
         <input
@@ -11,6 +16,11 @@
           placeholder="Digite o slogan"
         />
       </div>
+      <InputWithImage
+        placeholder="Logo cabeçalho"
+        label="Logo cabeçalho"
+        @outputData="listenOutputData"
+      />
       <div class="input__group">
         <label for="slogan" class="input__label">Mensagem</label>
         <input
@@ -26,6 +36,7 @@
 </template>
 
 <script>
+import InputWithImage from "../shared/InputWithImage.vue";
 export default {
   name: "HeaderForm",
   data() {
@@ -42,7 +53,11 @@ export default {
     logInForm() {
       console.log(this.header.slogan);
     },
+    listenOutputData(data) {
+      console.log("OUTPUTED DATA", data);
+    },
   },
+  components: { InputWithImage },
 };
 </script>
 
