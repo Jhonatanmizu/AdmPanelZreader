@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="content">
+    <div class="content p">
       <InputWithImage
         placeholder="logomarca"
         label="Logomarca"

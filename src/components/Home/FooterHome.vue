@@ -2,7 +2,10 @@
   <footer class="footer">
     <div class="container">
       <div class="socials">
-        <a href="https://www.facebook.com/zReader-103298028407156" target="_blank">
+        <a
+          href="https://www.facebook.com/zReader-103298028407156"
+          target="_blank"
+        >
           <!-- <img src="../assets/facebook.svg" alt="Facebook" /> -->
           <i class="fa-brands fa-facebook"></i>
         </a>
@@ -10,20 +13,29 @@
           <!-- <img src="../assets/instagram.svg" alt="Instagram" /> -->
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://www.youtube.com/channel/UCKrm7dV1AYte8oTRuTH4T-g" target="_blank">
+        <a
+          href="https://www.youtube.com/channel/UCKrm7dV1AYte8oTRuTH4T-g"
+          target="_blank"
+        >
           <!-- <img src="../assets/youtube.svg" alt="Youtube" /> -->
           <i class="fa-brands fa-youtube"></i>
         </a>
       </div>
       <div class="sponsors">
-        <img src="../../assets/logo_finep.png" alt="Logo Finep">
-        <img src="../../assets/logo_fapesb.png" alt="Logo fapesb">
-        <img src="../../assets/logo_estadobahia.png" alt="Logo Estado da Bahia">
+        <img src="../../assets/logo_finep.png" alt="Logo Finep" />
+        <img src="../../assets/logo_fapesb.png" alt="Logo fapesb" />
+        <img
+          src="../../assets/logo_estadobahia.png"
+          alt="Logo Estado da Bahia"
+        />
       </div>
       <div class="developed">
-        <span>Desenvolvido com <i class="fab fas fa-heart"></i> pela <a href="https://tecnosystemej.com.br"
-            target="_blank">Tecno
-            System</a> </span>
+        <span
+          >Desenvolvido com <i class="fab fas fa-heart"></i> pela
+          <a href="https://tecnosystemej.com.br" target="_blank"
+            >Tecno System</a
+          >
+        </span>
       </div>
     </div>
   </footer>
@@ -33,7 +45,7 @@ export default {
   name: "FooterHome",
 };
 </script>
-<style>
+<style scoped>
 .footer {
   width: 100%;
   min-height: 18rem;
@@ -54,7 +66,7 @@ export default {
 
 .socials {
   font-size: 4rem;
-  gap: .5rem;
+  gap: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,7 +75,6 @@ export default {
 
 .socials a {
   color: var(--secondary-color);
-
 }
 
 .sponsors {
@@ -71,7 +82,6 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-
 }
 
 .sponsors img {
@@ -94,7 +104,7 @@ export default {
   cursor: pointer;
   color: var(--secondary-color);
   font-style: italic;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .developed a:hover {
@@ -115,7 +125,7 @@ export default {
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .container {
     flex-direction: column;
   }

@@ -9,6 +9,7 @@
   --gap: 1rem;
   --primary-color: #e72b45;
   --secondary-color: #fff;
+  --green-color: #6ca762;
   --light-bg: #f2f2f2f5;
   --alt-color: #ffe4e1;
   --grey-variant: #d9d9d9;
@@ -63,6 +64,11 @@ h6 {
   outline: none;
   border: 0.2rem solid var(--light-bg);
   padding: 0.2rem;
+}
+.input__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 @media screen and (max-width: 800px) {
   .input-text {
