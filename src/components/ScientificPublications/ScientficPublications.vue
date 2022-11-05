@@ -31,7 +31,7 @@
       <div class="publications__container" v-if="!isVisible">
         <ul class="publications">
           <li class="publication" v-for="publication in publications" :key="publication">
-            {{ publication.text }}
+            <a :href="publication.link" target="_blank"> {{ publication.text }}</a>
             <div class="publication__actions">
 
               <ButtonWithIcon edit :handle="() => editPublication(publication.id)">

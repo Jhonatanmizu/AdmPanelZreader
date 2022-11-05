@@ -13,11 +13,10 @@
   --light-bg: #f2f2f2f5;
   --alt-color: #ffe4e1;
   --grey-variant: #d9d9d9;
-  --gradient-color: linear-gradient(
-      270deg,
+  --black-color: #000;
+  --gradient-color: linear-gradient(270deg,
       #c10c25 50%,
-      rgba(231, 43, 69, 0) 81.68%
-    ),
+      rgba(231, 43, 69, 0) 81.68%),
     #f0565c;
 }
 
@@ -46,13 +45,27 @@ h5,
 h6 {
   font-family: "Montserrat", sans-serif;
 }
+
+a {
+  text-decoration: none;
+  color: var(--black-color);
+  cursor: pointer;
+  transition: all ease .3s;
+}
+
+a:hover {
+  filter: opacity(.5);
+}
+
 .p {
   padding: 2.4rem 3.6rem;
 }
+
 .input-label {
   font-size: 2.8rem;
   text-transform: capitalize;
 }
+
 .input-text {
   width: 56rem;
   border: none;
@@ -65,11 +78,13 @@ h6 {
   border: 0.2rem solid var(--light-bg);
   padding: 0.2rem;
 }
+
 .input__group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
+
 @media screen and (max-width: 800px) {
   .input-text {
     width: fit-content;
