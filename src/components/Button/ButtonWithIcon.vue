@@ -1,41 +1,28 @@
 <template>
   <div>
-    <button
-      :type="type"
-      :disabled="isDisabled"
-      @click="handleAction"
-      :class="['action-btn', action == 'save' ? 'btn-save' : 'btn-cancel']"
-    >
-      {{ text }}
-    </button>
+    <button class="btn" @click="handle"><slot></slot></button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ActionBtn",
+  name: "ButtonWithIcon",
   props: {
-    type: String,
-    text: String,
-    action: String,
     handle: {
       type: Function,
     },
-    isDisabled: Boolean,
   },
   methods: {
     handleAction() {
-      if (this.handle) {
-        this.handle();
-      }
+      if (this.handle) this.handle();
     },
   },
 };
 </script>
 
 <style scoped>
-.action-btn {
-  width: 9.5625rem;
+.btn {
+  width: 4rem;
   padding: 0.5rem;
   height: 2.875rem;
   display: flex;
@@ -52,20 +39,14 @@ export default {
   box-shadow: 0 0.3rem rgba(121, 121, 121, 0.65);
   transition: all ease-in-out 0.3s;
 }
-.action-btn:active {
+.btn:active {
   transform: translate(0, 0.3rem);
   box-shadow: 0 0.1rem rgba(255, 255, 255, 0.65);
 }
-.action-btn:disabled {
+.btn:disabled {
   opacity: 0.7;
 }
 .action-btn:hover {
   filter: brightness(110%);
-}
-.btn-save {
-  background-color: var(--green-color);
-}
-.btn-cancel {
-  background-color: var(--primary-color);
 }
 </style>

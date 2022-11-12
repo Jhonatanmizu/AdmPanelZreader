@@ -9,6 +9,7 @@
   --gap: 1rem;
   --primary-color: #e72b45;
   --secondary-color: #fff;
+  --tertiary-color: #000;
   --green-color: #6ca762;
   --light-bg: #f2f2f2f5;
   --alt-color: #ffe4e1;
