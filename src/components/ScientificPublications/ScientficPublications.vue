@@ -1,117 +1,189 @@
 <template>
   <div class="container p">
-    <div class="add-container">
-      <ButtonWithIcon :handle="toggleForm">
+    <div class="row-add">
+      <ButtonWithIcon :handle="() => toggleIsVisible()">
         <i class="fa-solid fa-plus"></i>
+
       </ButtonWithIcon>
     </div>
-    <form class="form" v-if="isFormOpen">
-      <div class="form__controls">
-        <div class="input__group">
-          <label for="text" class="input-label">Texto</label>
-          <input
-            type="text"
-            class="input-text"
-            v-model="formData.text"
-            id="text"
-          />
+    <Transition name="fade">
+      <form class="form" @submit="handleFormSubmit" v-if="isVisible">
+        <div class="form__controls">
+          <div class="input__group">
+            <input type="hidden" name="id" v-model="formData.id">
+          </div>
+          <div class="input__group">
+            <label for="text" class="input-label">Texto</label>
+            <input type="text" class="input-text" v-model="formData.text" />
+          </div>
+          <div class="input__group">
+            <label for="link" class="input-label">link</label>
+            <input type="text" class="input-text" v-model="formData.link" />
+          </div>
         </div>
-        <div class="input__group">
-          <label for="link" class="input-label">link</label>
-          <input
-            type="text"
-            class="input-text"
-            v-on:change="alert('fom', formData)"
-            v-model="formData.link"
-            id="link"
-          />
+        <div class="form__actions">
+          <Button text="Cancelar" type="button" @click="clearFormData" />
+          <Button text="Salvar" type="submit" action="save" :isDisabled="checkFormData()" />
         </div>
+      </form>
+    </Transition>
+    <Transition name="fade">
+      <div class="publications__container" v-if="!isVisible">
+        <ul class="publications">
+          <li class="publication" v-for="publication in publications" :key="publication">
+            <a :href="publication.link" target="_blank"> {{ publication.text }}</a>
+            <div class="publication__actions">
+
+              <ButtonWithIcon edit :handle="() => completeForm(publication.id)">
+                <i class="fa-solid fa-pen-to-square"></i>
+
+              </ButtonWithIcon>
+              <ButtonWithIcon :handle="() => deletePublication(publication.id)">
+                <i class="fa-solid fa-trash"></i>
+              </ButtonWithIcon>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="form__actions">
-        <Button text="Cancelar" :handle="toggleForm" />
-        <Button
-          text="Salvar"
-          :handle="addPublication"
-          action="save"
-          :isDisabled="checkFormData()"
-        />
-      </div>
-    </form>
-    <div class="publications">
-      <div
-        class="publication"
-        v-for="publication of publications"
-        :key="publication"
-      >
-        {{ publication.text }}
-        <!-- <div class="text__publication">
-          <a :href="publication.link"> {{ publication.text }} </a>
-        </div>
-        <div class="actions__pubclication">
-          <ButtonWithIcon :handle="removePublication(publication)">
-            <i class="fa-solid fa-trash"></i>
-          </ButtonWithIcon>
-        </div> -->
-      </div>
-    </div>
+    </Transition>
+
   </div>
 </template>
 
 <script>
-import ButtonWithIcon from "../Button/ButtonWithIcon.vue";
+import { ref, onMounted } from "vue";
 import Button from "../Button/Button.vue";
+import ButtonWithIcon from "../ButtonWithIcon/ButtonWithIcon.vue";
+import api from '../../services/api'
 export default {
-  name: "ScientificPublications",
-  data() {
-    return {
-      isFormOpen: false,
-      publications: [
-        {
-          id: 1,
-          text: "Publicao 1",
-          link: "www.google.com",
-        },
-      ],
-      formData: {
-        text: "",
-        link: "",
-      },
-    };
-  },
-  methods: {
-    clearForm() {
-      this.formData.text = "";
-      this.formData.link = "";
-    },
-    handleFormSubmit(e) {
+  setup() {
+    onMounted(() => {
+      getPublications()
+    })
+    const publications = ref([
+      {
+        id: 1,
+        text: "alog",
+        link: "google.com",
+      }
+    ])
+    const formData = ref({
+      id: null,
+      text: "",
+      link: "",
+    });
+    const isVisible = ref(false)
+    const toggleIsVisible = () => {
+      console.log("TOGGLE");
+      isVisible.value = !isVisible.value
+      console.log("ISVISIBLE", isVisible.value);
+    }
+    const logData = () => {
+      console.log(publications);
+    }
+    const handleFormSubmit = (e) => {
       e.preventDefault();
-      this.publications.push(this.formData);
-    },
-    toggleForm() {
-      console.log("TOOGLE");
-      this.clearForm();
-      this.isFormOpen = !this.isFormOpen;
-      console.log("ISFORM", this.isFormOpen);
-    },
-    checkFormData() {
-      if (!this.formData.text || !this.formData.link) {
+      if(formData.value.id){
+        editPublication()
+      }else{
+        storePublication()
+      }
+      clearFormData()
+      // toggleIsVisible()
+    };
+    const editPublication = async() =>{
+      try {
+       const result = await api.put(`/scientific-publication/${formData.value.id}`, publiToBack(formData.value))
+       console.log(result)
+       getPublications()
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    const storePublication = async () =>{
+      try {
+       const result = await api.post('/scientific-publication', publiToBack(formData.value))
+       console.log(result.data)
+       getPublications()
+      } catch (error) {
+        console.error(error)
+      }
+
+    }
+    const getPublications = async () => {
+      try {
+        let result = await api.get('/scientific-publication')
+        publiToFront(result.data.message)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    const publiToFront = (publis) => {
+      if (publis) {
+        publications.value = publis.map(p => {
+          return {
+            id: p.id,
+            text: p.title,
+            link: p.src
+          }
+        })
+      }
+    }
+    const publiToBack = (publi) => {
+      return {
+        id: publi.id,
+        title: publi.text,
+        src: publi.link
+      }
+    }
+    const completeForm = (id) => {
+      toggleIsVisible()
+      let found = publications.value.find(p => p.id === id)
+      formData.value = {
+        id: found.id,
+        text: found.text,
+        link: found.link
+      }
+    }
+    const deletePublication = (id) => {
+      api.delete(`/scientific-publication/${id}`).then((r) => {
+        console.log("r", r);
+        getPublications()
+
+      }).catch((e) => {
+        console.log("e", e);
+      })
+
+    }
+    const checkFormData = () => {
+      if (!formData.value.text || !formData.value.link) {
         return true;
       } else {
         return false;
       }
-    },
-    addPublication() {
-      console.log("PUBLIC", this.publications);
-      console.log("data", this.formData);
-      this.publications.push(this.formData);
-      this.clearForm();
-    },
-    removePublication(index) {
-      this.publications.splice(index, 1);
-    },
+    };
+    const clearFormData = () => {
+      formData.value = {
+        id: null,
+        text: null,
+        link: null
+      }
+      toggleIsVisible()
+    }
+    return {
+      formData,
+      handleFormSubmit,
+      checkFormData,
+      publications,
+      logData,
+      deletePublication,
+      completeForm,
+      clearFormData,
+      isVisible,
+      toggleIsVisible
+    };
   },
-
-  components: { ButtonWithIcon, Button },
+  components: { Button, ButtonWithIcon },
 };
 </script>
 
@@ -120,65 +192,96 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* justify-content: space-between; */
   width: 100%;
 }
+
 .form__controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .form__actions {
   margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  gap: 2rem
 }
+
+.publications__container {
+  width: 100%;
+  margin-top: .2rem 0;
+
+}
+
 .publications {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.publications .publication {
+  background-color: var(--alt-color);
+  padding: .5rem;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 2rem;
+  box-shadow: 0 0.3rem rgba(121, 121, 121, 0.65);
+
+}
+
+.publication .publication__actions {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  margin: 0.3rem 0;
+  gap: .2rem;
 }
-.publications .publication {
-  background-color: var(--alt-color);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.row-add {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
+  margin: 1rem 0;
   width: 100%;
-  height: 4rem;
 }
-.publication .text__publication a {
-  color: var(--tertiary-color);
-  font-weight: 500;
-  text-decoration: none;
-}
-.add-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  margin: 0.5rem 0;
-}
+
 @media screen and (max-width: 800px) {
   .form__controls {
     flex-direction: column;
   }
+
   .form__actions {
-    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    /* justify-content: space-between; */
   }
+
 }
 </style>
