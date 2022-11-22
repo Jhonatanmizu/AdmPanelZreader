@@ -34,7 +34,7 @@
             <a :href="publication.link" target="_blank"> {{ publication.text }}</a>
             <div class="publication__actions">
 
-              <ButtonWithIcon edit :handle="() => editPublication(publication.id)">
+              <ButtonWithIcon edit :handle="() => completeForm(publication.id)">
                 <i class="fa-solid fa-pen-to-square"></i>
 
               </ButtonWithIcon>
@@ -44,9 +44,6 @@
             </div>
           </li>
         </ul>
-        <!-- <div class="publication" v-for="publication in publications" :key="publication"> -->
-
-        <!-- </div> -->
       </div>
     </Transition>
 
@@ -54,12 +51,15 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Button from "../Button/Button.vue";
 import ButtonWithIcon from "../ButtonWithIcon/ButtonWithIcon.vue";
-
+import api from '../../services/api'
 export default {
   setup() {
+    onMounted(() => {
+      getPublications()
+    })
     const publications = ref([
       {
         id: 1,
@@ -83,22 +83,60 @@ export default {
     }
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      console.log("FORM DATA", formData.value);
-      let model = {
-        ...formData.value,
-        id: publications.value.length
+      if(formData.value.id){
+        editPublication()
+      }else{
+        storePublication()
       }
-      if (model)
-        publications.value.push(model)
       clearFormData()
+      // toggleIsVisible()
     };
-    const getPublications = () => {
-      for (let i = 0; i < 3; i++) {
-        publications.value.push()
-
+    const editPublication = async() =>{
+      try {
+       const result = await api.put(`/scientific-publication/${formData.value.id}`, publiToBack(formData.value))
+       console.log(result)
+       getPublications()
+      } catch (error) {
+        console.error(error)
       }
     }
-    const editPublication = (id) => {
+    const storePublication = async () =>{
+      try {
+       const result = await api.post('/scientific-publication', publiToBack(formData.value))
+       console.log(result.data)
+       getPublications()
+      } catch (error) {
+        console.error(error)
+      }
+
+    }
+    const getPublications = async () => {
+      try {
+        let result = await api.get('/scientific-publication')
+        publiToFront(result.data.message)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    const publiToFront = (publis) => {
+      if (publis) {
+        publications.value = publis.map(p => {
+          return {
+            id: p.id,
+            text: p.title,
+            link: p.src
+          }
+        })
+      }
+    }
+    const publiToBack = (publi) => {
+      return {
+        id: publi.id,
+        title: publi.text,
+        src: publi.link
+      }
+    }
+    const completeForm = (id) => {
       toggleIsVisible()
       let found = publications.value.find(p => p.id === id)
       formData.value = {
@@ -106,16 +144,15 @@ export default {
         text: found.text,
         link: found.link
       }
-      console.log("FOUND", found);
-      console.log("FORM DATA", formData.value);
-
     }
     const deletePublication = (id) => {
-      // TODO Lógica cabulosa
-      console.log("DELETANDO", id);
-      publications.value = publications.value.filter(p => p.id != id)
-      console.log("PUBLICATIONS", publications.value);
-      getPublications()
+      api.delete(`/scientific-publication/${id}`).then((r) => {
+        console.log("r", r);
+        getPublications()
+
+      }).catch((e) => {
+        console.log("e", e);
+      })
 
     }
     const checkFormData = () => {
@@ -140,7 +177,7 @@ export default {
       publications,
       logData,
       deletePublication,
-      editPublication,
+      completeForm,
       clearFormData,
       isVisible,
       toggleIsVisible
@@ -155,7 +192,6 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* justify-content: space-between; */
   width: 100%;
 }
 
@@ -194,7 +230,7 @@ export default {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  gap: .3rem;
+  gap: .5rem;
 }
 
 .publications .publication {
