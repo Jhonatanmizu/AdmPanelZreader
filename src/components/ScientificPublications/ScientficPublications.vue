@@ -60,13 +60,7 @@ export default {
     onMounted(() => {
       getPublications()
     })
-    const publications = ref([
-      {
-        id: 1,
-        text: "alog",
-        link: "google.com",
-      }
-    ])
+    const publications = ref([])
     const formData = ref({
       id: null,
       text: "",
@@ -83,28 +77,28 @@ export default {
     }
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      if(formData.value.id){
+      if (formData.value.id) {
         editPublication()
-      }else{
+      } else {
         storePublication()
       }
       clearFormData()
       // toggleIsVisible()
     };
-    const editPublication = async() =>{
+    const editPublication = async () => {
       try {
-       const result = await api.put(`/scientific-publication/${formData.value.id}`, publiToBack(formData.value))
-       console.log(result)
-       getPublications()
+        const result = await api.put(`/scientific-publication/${formData.value.id}`, publiToBack(formData.value))
+        console.log(result)
+        getPublications()
       } catch (error) {
         console.error(error)
       }
     }
-    const storePublication = async () =>{
+    const storePublication = async () => {
       try {
-       const result = await api.post('/scientific-publication', publiToBack(formData.value))
-       console.log(result.data)
-       getPublications()
+        const result = await api.post('/scientific-publication', publiToBack(formData.value))
+        console.log(result.data)
+        getPublications()
       } catch (error) {
         console.error(error)
       }
